@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>INDEX</title>
+</head>
+<body>
+	<table border="1">
+    <tbody>
+		<tr th:each="measure : ${listMeasures}">
+			<td th:text="${measure.id}"></td>
+			<td th:text="${measure.device_id}"></td>
+			<td th:text="${measure.value}"></td>
+			<td th:text="${measure.unit}"></td>
+			<td th:text="${measure.date.day}"></td>
+			<td th:text="${measure.date.month}"></td>
+			<td th:text="${measure.date.year}"></td>
+			<td><a th:href="@{/showFormForUpdate/{id}(id=${measure.id})}" class="btn btn-primary">Update</a></td>
+		</tr>
+    </tbody>
+</table>
+<div th:if="${measurePage.totalPages > 0}" class="pagination"
+    th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/listMeasures(size=${measurePage.size}, page=${pageNumber})}"
+        th:text=${pageNumber}
+        th:class="${pageNumber==measurePage.number + 1} ? active"></a>
+</div>
+
+</body>
+</html>
